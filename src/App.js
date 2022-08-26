@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import TodoList from './redux/features/todos/TodoList';
+import TodoForm from './redux/features/todos/TodoForm';
+import Badge from 'react-bootstrap/Badge';
+import './styles/App.css';
+
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="title"> 
+        <Badge bg="primary">
+          Todo List
+        </Badge> 
+      </div>
+      <TodoList />
+      <TodoForm />
     </div>
-  );
+  )
 }
 
 export default App;
