@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { addTodo } from './todosSlice'
+import { addTodo } from '../redux/todosSlice'
 import { useDispatch } from 'react-redux'
 import Form from 'react-bootstrap/Form'
-import {BsFillPlusCircleFill} from "react-icons/bs"
+import { BsFillPlusCircleFill } from "react-icons/bs"
 
 
 

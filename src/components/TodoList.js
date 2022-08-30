@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
-import { selectTodos } from './todosSlice';
-import { deleteTodo } from './todosSlice'
+import { selectTodos } from '../redux/todosSlice'
+import { deleteTodo } from '../redux/todosSlice'
 import { useDispatch } from 'react-redux'
 import Form from 'react-bootstrap/Form'
 
