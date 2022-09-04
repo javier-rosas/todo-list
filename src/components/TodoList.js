@@ -1,18 +1,24 @@
 import { useSelector } from 'react-redux'
 import { selectTodos } from '../redux/todosSlice'
-import { deleteTodo } from '../redux/todosSlice'
+import { apiDeleteTodo } from '../redux/todosSlice'
 import { useDispatch } from 'react-redux'
+import { useAuth0 } from '@auth0/auth0-react'
 import Form from 'react-bootstrap/Form'
+
 
 
 function TodoList() {
 
   const dispatch = useDispatch()
   const todos = useSelector(selectTodos)
+  const { getAccessTokenSilently } = useAuth0()
 
-  const onCheck = (e) => {
+  const onCheck = async (e) => {
     if (e.target.checked) {
-      dispatch( deleteTodo(e.target.id) )
+      const token = await getAccessTokenSilently()
+      const indexToDelete = e.target.id
+      const payload = { indexToDelete, token }
+      dispatch( apiDeleteTodo(payload) )
       e.target.checked = false
     }
   }

@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { addTodo } from '../redux/todosSlice'
+import { apiAddTodo } from '../redux/todosSlice'
 import { useDispatch } from 'react-redux'
+import { useAuth0 } from '@auth0/auth0-react'
 import Form from 'react-bootstrap/Form'
 import { BsFillPlusCircleFill } from "react-icons/bs"
-
 
 
 function TodoForm() {
@@ -12,22 +12,30 @@ function TodoForm() {
 
   const [todo, setTodo] = useState("")
   const [press, setPress] = useState(false)
+  const { getAccessTokenSilently } = useAuth0()
 
   const onChange = (e) => {
     setTodo(e.target.value)
   }
 
-  const onKeyEnter = (e) => {  
+  const onKeyEnter = async (e) => {  
     if (e.key === "Enter") {
       e.preventDefault()
-      dispatch( addTodo(todo) )
+      const token = await getAccessTokenSilently()
+      const payload = { todo, token }
+      dispatch( apiAddTodo(payload) )
       setTodo("")
     }
   }
 
-  const onClickPlusIcon = (e) => {
+  const onClickPlusIcon = async (e) => {
     setPress(true)
-    dispatch( addTodo(todo) )
+    const token = await getAccessTokenSilently()
+    const payload = { 
+      todo: todo, 
+      token: token 
+    }
+    dispatch( apiAddTodo(payload) )
     setTimeout(() => setPress(false), 75)
     setTodo("")
   }

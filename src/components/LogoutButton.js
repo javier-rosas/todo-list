@@ -5,8 +5,13 @@ import Button from 'react-bootstrap/Button'
 const LogoutButton = () => {
   const { logout } = useAuth0();
 
+  const setUpLogout = () => {
+    localStorage.removeItem("user_token");
+    logout();
+  }
+
   return (
-    <Button onClick={() => logout()}>
+    <Button onClick={() => setUpLogout()}>
       Log Out
     </Button>
   );
